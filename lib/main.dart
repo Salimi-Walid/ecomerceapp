@@ -1,11 +1,13 @@
-import 'package:ecomerceapp/page/login.dart';
+//import 'package:ecomerceapp/auth.dart';
+import 'package:ecomerceapp/page/hompage.dart';
+//import 'package:ecomerceapp/page/login.dart';
+//import 'package:ecomerceapp/page/signe_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: "walid",
       options: const FirebaseOptions(
           apiKey: "AIzaSyBtrFgOs6Qo04R5S11O6mHqlCaZQ8YCJD4",
           appId: "1:874092096357:android:b10074acd9cfabdf9d0f8c",
@@ -21,13 +23,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Shoes App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Login(),
+      home: const Hompage(),
+      //routes: {
+      //'/': (context) => const Auth(),
+      //'hompagee': (context) => const Hompage(),
+      //'login': (context) => const Login(),
+      //'Sign-up': (context) => const Signup()
+      //},
     );
   }
 }

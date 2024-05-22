@@ -4,11 +4,14 @@ class Textfeild extends StatelessWidget {
   final bool ispasword;
   final TextInputType textInputType1;
   final String hinttext;
-  const Textfeild(
-      {super.key,
-      required this.hinttext,
-      required this.ispasword,
-      required this.textInputType1});
+  final TextEditingController? controler;
+  const Textfeild({
+    super.key,
+    required this.hinttext,
+    required this.ispasword,
+    required this.textInputType1,
+    required this.controler,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,7 @@ class Textfeild extends StatelessWidget {
           color: const Color.fromARGB(255, 252, 251, 249),
           borderRadius: BorderRadius.circular(10)),
       child: TextField(
+        controller: controler,
         obscureText: ispasword,
         keyboardType: textInputType1,
         textInputAction: TextInputAction.next,

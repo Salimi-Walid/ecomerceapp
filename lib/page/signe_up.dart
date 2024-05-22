@@ -1,5 +1,6 @@
 import 'package:ecomerceapp/page/login.dart';
 import 'package:ecomerceapp/widget/textfeild.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -11,6 +12,34 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final emailController = TextEditingController();
+  final passwordcontroler = TextEditingController();
+  final confermpassword = TextEditingController();
+  Future signup() async {
+    if (passwordconferm()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordcontroler.text.trim());
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushNamed('/');
+  }
+
+  bool passwordconferm() {
+    if (passwordcontroler.text.trim() == confermpassword.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordcontroler.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +75,8 @@ class _SignupState extends State<Signup> {
                 height: 40,
               ),
               // textfeild for email and signup
-              const Textfeild(
+              Textfeild(
+                controler: emailController,
                 ispasword: false,
                 textInputType1: TextInputType.emailAddress,
                 hinttext: "Email",
@@ -54,17 +84,19 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 20,
               ),
-              const Textfeild(
+              Textfeild(
+                controler: passwordcontroler,
                 ispasword: true,
-                textInputType1: TextInputType.emailAddress,
+                textInputType1: TextInputType.visiblePassword,
                 hinttext: "Password",
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Textfeild(
+              Textfeild(
+                controler: confermpassword,
                 ispasword: true,
-                textInputType1: TextInputType.emailAddress,
+                textInputType1: TextInputType.visiblePassword,
                 hinttext: "Conferm Password",
               ),
               const SizedBox(
@@ -100,8 +132,9 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 20,
               ),
-              //button for login
+              //button for Signup
               GestureDetector(
+                onTap: signup,
                 child: Container(
                   width: 200,
                   height: 40,

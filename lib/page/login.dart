@@ -1,5 +1,6 @@
 import 'package:ecomerceapp/page/signe_up.dart';
 import 'package:ecomerceapp/widget/textfeild.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -11,6 +12,22 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final emailController = TextEditingController();
+  final passwordcontroler = TextEditingController();
+
+  Future login() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordcontroler.text.trim());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordcontroler.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +63,8 @@ class _LoginState extends State<Login> {
                 height: 40,
               ),
               // textfeild for email and signup
-              const Textfeild(
+              Textfeild(
+                controler: emailController,
                 ispasword: false,
                 textInputType1: TextInputType.emailAddress,
                 hinttext: "Email",
@@ -54,9 +72,10 @@ class _LoginState extends State<Login> {
               const SizedBox(
                 height: 20,
               ),
-              const Textfeild(
+              Textfeild(
+                controler: passwordcontroler,
                 ispasword: true,
-                textInputType1: TextInputType.emailAddress,
+                textInputType1: TextInputType.visiblePassword,
                 hinttext: "Password",
               ),
               const SizedBox(
@@ -95,18 +114,21 @@ class _LoginState extends State<Login> {
                 height: 20,
               ),
               //button for login
-              Container(
-                width: 200,
-                height: 40,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: const Color.fromARGB(255, 255, 255, 255)),
-                child: const Center(
-                  child: Text('Login',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
+              GestureDetector(
+                onTap: login,
+                child: Container(
+                  width: 200,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                  child: const Center(
+                    child: Text('Login',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
                 ),
               ),
               const SizedBox(
