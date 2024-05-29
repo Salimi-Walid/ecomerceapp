@@ -1,4 +1,6 @@
+import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,17 +12,20 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
-                'Welcom Name',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                'Welcom ',
+                style: GoogleFonts.getFont('REM',
+                    textStyle: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
               ),
-              Padding(
+              //cart icon
+              const Padding(
                 padding: EdgeInsets.fromLTRB(0, 15, 15, 0),
                 child: Icon(
                   Icons.shopping_bag,
@@ -28,13 +33,21 @@ class _HomeState extends State<Home> {
                 ),
               )
             ]),
+            //reserch textfeild in widget
+            const Reserche(),
+            //promotion image
+            Text('Promotion :',
+                style: GoogleFonts.getFont('REM',
+                    textStyle: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold))),
+            //producte card
             Text(
-              'To the Menu',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Promotion :',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              'Product :',
+              style: GoogleFonts.getFont(
+                'REM',
+                textStyle:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
