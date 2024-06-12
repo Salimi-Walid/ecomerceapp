@@ -1,15 +1,23 @@
+import 'package:ecomerceapp/List/listprodect.dart';
+import 'package:ecomerceapp/Product%20scren/prodectscren.dart';
 import 'package:ecomerceapp/widget/reserche.dart';
+import 'package:ecomerceapp/widget/shoesdetail.dart';
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  void navigateProdectscren(int index) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Prodectscren()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,6 +55,17 @@ class _HomeState extends State<Home> {
                 'REM',
                 textStyle:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            //prodecte ezye
+            SizedBox(
+              height: 320,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => ShoesDetaile(
+                  shoes: shoesezy[index],
+                  onTap: () => navigateProdectscren(index),
+                ),
               ),
             ),
           ],
