@@ -26,9 +26,10 @@ class _ResercheState extends State<Reserche> {
           hintText: 'Reserche',
           hintStyle: GoogleFonts.getFont('REM',
               textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 26, 23, 23))),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 26, 25, 25),
+              )),
         ),
       ),
     );

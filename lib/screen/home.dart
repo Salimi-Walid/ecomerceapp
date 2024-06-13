@@ -3,8 +3,8 @@ import 'package:ecomerceapp/Product%20scren/prodectscren.dart';
 import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:ecomerceapp/widget/shoesdetail.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,11 +26,14 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                'Welcom ',
-                style: GoogleFonts.getFont('REM',
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  'Welcom ',
+                  style: GoogleFonts.getFont('REM',
+                      textStyle: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                ),
               ),
               //cart icon
               const Padding(
@@ -44,18 +47,56 @@ class _HomeState extends State<Home> {
             //reserch textfeild in widget
             const Reserche(),
             //promotion image
-            Text('Promotion :',
-                style: GoogleFonts.getFont('REM',
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold))),
-            //producte card
-            Text(
-              'Product :',
-              style: GoogleFonts.getFont(
-                'REM',
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text('Promotion :',
+                  style: GoogleFonts.getFont('REM',
+                      textStyle: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+            ),
+            //image for promotion <CarouselSlider>
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                ),
+                items: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset('addidas1.jpg')),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset('addidas2.jpg')),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset('adiddas3.png')),
+                ],
               ),
+            ),
+            //producte card
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 10, right: 20),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Product :',
+                      style: GoogleFonts.getFont(
+                        'REM',
+                        textStyle: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const Text(
+                      'veu all →',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 30, 90, 255),
+                      ),
+                    )
+                  ]),
             ),
             //prodecte ezye
             SizedBox(
