@@ -1,5 +1,6 @@
 import 'package:ecomerceapp/List/listprodect.dart';
 import 'package:ecomerceapp/Product%20scren/prodectscren.dart';
+import 'package:ecomerceapp/all/shesscren.dart';
 import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:ecomerceapp/widget/shoesdetail.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +91,21 @@ class _HomeState extends State<Home> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const Text(
-                      'veu all →',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 30, 90, 255),
+                    //text for sew etilisater all shoes in store
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Allshoes())),
+                      child: Text(
+                        'veu all ...',
+                        style: GoogleFonts.getFont(
+                          'REM',
+                          textStyle: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 30, 90, 255)),
+                        ),
                       ),
                     )
                   ]),
