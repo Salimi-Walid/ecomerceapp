@@ -14,7 +14,10 @@ class _AllshoesState extends State<Allshoes> {
   void navigateProdectscren(int index) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Prodectscren()),
+      MaterialPageRoute(
+          builder: (context) => Prodectscren(
+                shoes: shoesezy[index],
+              )),
     );
   }
 

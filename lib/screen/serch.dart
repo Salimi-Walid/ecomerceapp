@@ -1,3 +1,4 @@
+import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:flutter/material.dart';
 
 class Serch extends StatefulWidget {
@@ -10,6 +11,8 @@ class Serch extends StatefulWidget {
 class _SerchState extends State<Serch> {
   @override
   Widget build(BuildContext context) {
-    return const Text('data');
+    return const Scaffold(
+      body: Column(children: [Reserche()]),
+    );
   }
 }

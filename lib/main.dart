@@ -1,9 +1,11 @@
 //import 'package:ecomerceapp/auth.dart';
 import 'package:ecomerceapp/page/hompage.dart';
+import 'package:ecomerceapp/provider/data.dart';
 //import 'package:ecomerceapp/page/login.dart';
 //import 'package:ecomerceapp/page/signe_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,20 +24,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shoes App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) {
+        return Data();
+      },
+      child: MaterialApp(
+        title: 'Shoes App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const Hompage(),
+        //routes: {
+        //'/': (context) => const Auth(),
+        //'hompagee': (context) => const Hompage(),
+        //'login': (context) => const Login(),
+        //'Sign-up': (context) => const Signup()
+        //},
       ),
-      debugShowCheckedModeBanner: false,
-      home: const Hompage(),
-      //routes: {
-      //'/': (context) => const Auth(),
-      //'hompagee': (context) => const Hompage(),
-      //'login': (context) => const Login(),
-      //'Sign-up': (context) => const Signup()
-      //},
     );
   }
 }

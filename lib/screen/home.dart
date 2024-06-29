@@ -1,11 +1,13 @@
 import 'package:ecomerceapp/List/listprodect.dart';
 import 'package:ecomerceapp/Product%20scren/prodectscren.dart';
 import 'package:ecomerceapp/all/shesscren.dart';
+import 'package:ecomerceapp/provider/data.dart';
 import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:ecomerceapp/widget/shoesdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,13 +16,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //navigation to navigation <prodecte scren> fonction
   void navigateProdectscren(int index) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Prodectscren()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => Prodectscren(
+                  shoes: shoesezy[index],
+                )));
   }
 
   @override
   Widget build(BuildContext context) {
+    final classInstancee = Provider.of<Data>(context);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -37,12 +45,30 @@ class _HomeState extends State<Home> {
                 ),
               ),
               //cart icon
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 15, 15, 0),
-                child: Icon(
-                  Icons.shopping_bag,
-                  size: 40,
-                ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
+                child: Stack(children: [
+                  const Icon(
+                    Icons.shopping_bag,
+                    size: 40,
+                  ),
+                  Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        shape: BoxShape.circle,
+                      ),
+                      //this ligic for provaider of if click icons in <shoesdetails.dart>
+                      // his plus 1 in the cart
+                      child: Text(
+                        '${classInstancee.prodectselected.length}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 0, 0),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                  //icon cart for go to cart for tcheck out
+                ]),
               )
             ]),
             //reserch textfeild in widget

@@ -1,8 +1,8 @@
 import 'package:ecomerceapp/List/listprodect.dart';
-
+import 'package:ecomerceapp/provider/data.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ShoesDetaile extends StatelessWidget {
   final Shoes shoes;
@@ -11,6 +11,7 @@ class ShoesDetaile extends StatelessWidget {
   const ShoesDetaile({super.key, required this.shoes, required this.onTap});
   @override
   Widget build(BuildContext context) {
+    final classInstancee = Provider.of<Data>(context);
     return GestureDetector(
       // onTap go for <home.dart> for void fonction
       onTap: onTap,
@@ -57,10 +58,15 @@ class ShoesDetaile extends StatelessWidget {
                               fontSize: 20, fontWeight: FontWeight.bold)),
                     ),
                     //icon for add
-                    const Icon(
-                      Icons.add_circle,
-                      size: 30,
-                    )
+                    GestureDetector(
+                      onTap: () {
+                        classInstancee.add(shoes);
+                      },
+                      child: const Icon(
+                        Icons.add_circle,
+                        size: 30,
+                      ),
+                    ),
                   ]),
             )
           ],
