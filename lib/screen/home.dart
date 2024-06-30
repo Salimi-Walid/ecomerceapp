@@ -2,6 +2,7 @@ import 'package:ecomerceapp/List/listprodect.dart';
 import 'package:ecomerceapp/Product%20scren/prodectscren.dart';
 import 'package:ecomerceapp/all/shesscren.dart';
 import 'package:ecomerceapp/provider/data.dart';
+import 'package:ecomerceapp/screen/cart.dart';
 import 'package:ecomerceapp/widget/reserche.dart';
 import 'package:ecomerceapp/widget/shoesdetail.dart';
 import 'package:flutter/material.dart';
@@ -48,16 +49,21 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
                 child: Stack(children: [
-                  const Icon(
-                    Icons.shopping_bag,
-                    size: 40,
+                  //icon cart for go to cart for tcheck out
+                  GestureDetector(
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Cart())),
+                    child: const Icon(
+                      Icons.shopping_bag,
+                      size: 40,
+                    ),
                   ),
                   Container(
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
                         shape: BoxShape.circle,
                       ),
-                      //this ligic for provaider of if click icons in <shoesdetails.dart>
+                      //this logic for provaider of if click icons in <shoesdetails.dart>
                       // his plus 1 in the cart
                       child: Text(
                         '${classInstancee.prodectselected.length}',
@@ -67,7 +73,6 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.bold,
                         ),
                       )),
-                  //icon cart for go to cart for tcheck out
                 ]),
               )
             ]),

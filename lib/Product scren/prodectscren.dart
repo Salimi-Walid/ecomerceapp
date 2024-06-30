@@ -17,7 +17,10 @@ class _ProdectscrenState extends State<Prodectscren> {
         children: [
           Image.asset(widget.shoes.imagepath),
           Row(
-            children: [Text(widget.shoes.name), Text(widget.shoes.prix)],
+            children: [
+              Text(widget.shoes.name),
+              Text('\$${widget.shoes.prix.toStringAsFixed(2)}')
+            ],
           )
         ],
       ),
