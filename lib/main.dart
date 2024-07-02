@@ -1,8 +1,8 @@
-//import 'package:ecomerceapp/auth.dart';
+import 'package:ecomerceapp/auth.dart';
 import 'package:ecomerceapp/page/hompage.dart';
+import 'package:ecomerceapp/page/login.dart';
 import 'package:ecomerceapp/provider/data.dart';
-//import 'package:ecomerceapp/page/login.dart';
-//import 'package:ecomerceapp/page/signe_up.dart';
+import 'package:ecomerceapp/page/signe_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -35,13 +35,12 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        home: const Hompage(),
-        //routes: {
-        //'/': (context) => const Auth(),
-        //'hompagee': (context) => const Hompage(),
-        //'login': (context) => const Login(),
-        //'Sign-up': (context) => const Signup()
-        //},
+        routes: {
+          '/': (context) => const Auth(),
+          'hompagee': (context) => const Hompage(),
+          'login': (context) => const Login(),
+          'Sign-up': (context) => const Signup()
+        },
       ),
     );
   }

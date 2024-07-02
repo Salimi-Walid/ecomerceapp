@@ -16,6 +16,12 @@ class _SignupState extends State<Signup> {
   final passwordcontroler = TextEditingController();
   final confermpassword = TextEditingController();
   Future signup() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
     if (passwordconferm()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
