@@ -61,6 +61,43 @@ class ShoesDetaile extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         classInstancee.add(shoes);
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 236, 207, 207),
+                              title: Text(
+                                'Added to Cart',
+                                style: GoogleFonts.getFont('REM',
+                                    textStyle: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              content: Text(
+                                '${shoes.name} has been added to your cart.',
+                                style: GoogleFonts.getFont('REM',
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(
+                                    'OK',
+                                    style: GoogleFonts.getFont('REM',
+                                        textStyle: const TextStyle(
+                                            fontSize: 15,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: const Icon(
                         Icons.add_circle,
