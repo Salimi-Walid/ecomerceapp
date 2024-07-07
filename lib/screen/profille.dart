@@ -1,21 +1,23 @@
+import 'package:ecomerceapp/provider/data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
-class Prophile extends StatefulWidget {
-  const Prophile({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<Prophile> createState() => _ProphileState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _ProphileState extends State<Prophile> {
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    final data = Provider.of<Data>(context);
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            // image de l'utelisater
+            // User profile image
             const CircleAvatar(
               backgroundColor: Color.fromARGB(255, 172, 172, 172),
               foregroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -25,18 +27,36 @@ class _ProphileState extends State<Prophile> {
                 size: 107,
               ),
             ),
-            // nome and prénome de l utelusater
-            Row(children: [
-              const Text('Name and Préname'),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
-            ]),
-            // email de l'utelisater
+            // User name and surname
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Name and Surname'),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.edit),
+                ),
+              ],
+            ),
+            // User email
             const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.email),
-                Text('email'),
+                SizedBox(width: 8),
+                Text('email@example.com'),
               ],
-            )
+            ),
+            ListTile(
+              leading: const Icon(Icons.dark_mode),
+              title: const Text('Dark Mode'),
+              trailing: Switch(
+                value: false,
+                onChanged: (value) {
+                  data.changeTheme();
+                },
+              ),
+            ),
           ],
         ),
       ),

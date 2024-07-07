@@ -19,7 +19,7 @@ class _HompageState extends State<Hompage> {
     Home(),
     Serch(),
     Cart(),
-    Prophile(),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {

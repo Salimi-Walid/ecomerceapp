@@ -16,4 +16,7 @@ class Data with ChangeNotifier {
     prixe -= shoes.prix;
     notifyListeners();
   }
+
+  //for dark mode
+  changeTheme() {}
 }

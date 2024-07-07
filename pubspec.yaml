@@ -41,6 +41,14 @@ dependencies:
   firebase_auth: ^4.19.5
   carousel_slider: ^4.2.1
   provider: ^6.1.2
+  flutter_native_splash: ^2.4.0
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web : true
+  image: "assets/logo.png"
+
 
 dev_dependencies:
   flutter_test:
