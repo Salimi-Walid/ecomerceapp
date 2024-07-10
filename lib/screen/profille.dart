@@ -1,5 +1,7 @@
 import 'package:ecomerceapp/provider/data.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
@@ -10,6 +12,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  // add image for profial
+  Future<void> onprofileTapped() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    final storageRef = FirebaseStorage.instance.ref();
+    final imageRef = storageRef.child('assets/logo.png');
+    final imageBytes = await image.readAsBytes();
+    await imageRef.putData(imageBytes);
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<Data>(context);
@@ -21,13 +34,16 @@ class _ProfileState extends State<Profile> {
               height: 50,
             ),
             // User profile image
-            const CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 172, 172, 172),
-              foregroundColor: Color.fromARGB(255, 0, 0, 0),
-              maxRadius: 68,
-              child: Icon(
-                Icons.person,
-                size: 107,
+            GestureDetector(
+              onTap: onprofileTapped,
+              child: const CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 172, 172, 172),
+                foregroundColor: Color.fromARGB(255, 0, 0, 0),
+                maxRadius: 68,
+                child: Icon(
+                  Icons.person,
+                  size: 107,
+                ),
               ),
             ),
             Padding(
