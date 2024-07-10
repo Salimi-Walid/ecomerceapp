@@ -27,8 +27,10 @@ class _SignupState extends State<Signup> {
           email: emailController.text.trim(),
           password: passwordcontroler.text.trim());
     }
+
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushNamed('/');
+    Navigator.of(context).pop();
   }
 
   bool passwordconferm() {
