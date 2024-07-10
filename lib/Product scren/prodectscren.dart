@@ -95,14 +95,15 @@ class Prodectscren extends StatelessWidget {
                   classInstancee.add(shoes);
                 },
                 child: Container(
-                  width: 200,
-                  height: 40,
+                  margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  height: 60,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 255, 255, 255)),
+                      color: const Color.fromARGB(255, 31, 31, 31)),
                   child: const Center(
                     child: Text('Add To Cart',
                         style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         )),

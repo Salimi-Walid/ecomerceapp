@@ -17,6 +17,9 @@ class _ProfileState extends State<Profile> {
       body: Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: 50,
+            ),
             // User profile image
             const CircleAvatar(
               backgroundColor: Color.fromARGB(255, 172, 172, 172),
@@ -27,36 +30,111 @@ class _ProfileState extends State<Profile> {
                 size: 107,
               ),
             ),
-            // User name and surname
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Name and Surname'),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.edit),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListTile(
+                leading: const Icon(Icons.dark_mode),
+                title: const Text('Dark Mode'),
+                trailing: Switch(
+                  value: false,
+                  onChanged: (value) {
+                    data.changeTheme();
+                  },
                 ),
-              ],
-            ),
-            // User email
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.email),
-                SizedBox(width: 8),
-                Text('email@example.com'),
-              ],
-            ),
-            ListTile(
-              leading: const Icon(Icons.dark_mode),
-              title: const Text('Dark Mode'),
-              trailing: Switch(
-                value: false,
-                onChanged: (value) {
-                  data.changeTheme();
-                },
               ),
             ),
+
+            // paramitre account and adress
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.account_circle),
+                      title: const Text('Account'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(40, 0, 60, 0),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    // addres
+                    ListTile(
+                      leading: const Icon(Icons.home),
+                      title: const Text('My addres'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // notre paramitre for profile
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                child: Column(
+                  children: [
+                    // add notification
+                    ListTile(
+                      leading: const Icon(Icons.notifications),
+                      title: const Text('Notification'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(40, 0, 60, 0),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    // add favorite
+                    ListTile(
+                      leading: const Icon(Icons.favorite),
+                      title: const Text('Favorit'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(40, 0, 60, 0),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    // add supporte
+                    ListTile(
+                      leading: const Icon(Icons.support_agent),
+                      title: const Text('Support'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(40, 0, 60, 0),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    // add Langage
+                    ListTile(
+                      leading: const Icon(Icons.language),
+                      title: const Text('Language'),
+                      trailing: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_forward_ios)),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
