@@ -1,49 +1,113 @@
 import 'package:ecomerceapp/provider/data.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:provider/provider.dart';
+import 'dart:typed_data';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  // ignore: library_private_types_in_public_api
+  _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  // add image for profial
-  Future<void> onprofileTapped() async {
+  Uint8List? pickedImage;
+  String? imageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadImageUrl();
+  }
+
+  Future<void> _loadImageUrl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedImageUrl = prefs.getString('profileImageUrl');
+    if (storedImageUrl != null) {
+      setState(() {
+        imageUrl = storedImageUrl;
+        // ignore: avoid_print
+        print('Loaded image URL: $imageUrl');
+      });
+    } else {
+      // ignore: avoid_print
+      print('No image URL found in SharedPreferences.');
+    }
+  }
+
+  Future<void> onProfileTapped() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-    final storageRef = FirebaseStorage.instance.ref();
-    final imageRef = storageRef.child('assets/logo.png');
-    final imageBytes = await image.readAsBytes();
-    await imageRef.putData(imageBytes);
+    if (image == null) {
+      // ignore: avoid_print
+      print('No image selected.');
+      return;
+    }
+
+    final Uint8List imageBytes = await image.readAsBytes();
+    setState(() {
+      pickedImage = imageBytes;
+    });
+
+    final storage = FirebaseStorage.instance;
+    final storageRef = storage.ref('gs://shoes-app-299bb.appspot.com');
+    final imageRef = storageRef.child(
+        'profileImages/logo_${DateTime.now().millisecondsSinceEpoch}.png');
+    final uploadTask = await imageRef.putData(imageBytes);
+    // ignore: avoid_print
+    print('Image uploaded: ${uploadTask.metadata?.fullPath}');
+
+    String downloadUrl = await imageRef.getDownloadURL();
+    // ignore: avoid_print
+    print('Download URL: $downloadUrl');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('profileImageUrl', downloadUrl);
+    // ignore: avoid_print
+    print('Image URL saved to SharedPreferences.');
+
+    setState(() {
+      imageUrl = downloadUrl;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<Data>(context);
+    final classInstancee = Provider.of<Data>(context);
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 50,
-            ),
-            // User profile image
+            const SizedBox(height: 50),
             GestureDetector(
-              onTap: onprofileTapped,
-              child: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 172, 172, 172),
-                foregroundColor: Color.fromARGB(255, 0, 0, 0),
-                maxRadius: 68,
-                child: Icon(
-                  Icons.person,
-                  size: 107,
+              onTap: onProfileTapped,
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: (pickedImage != null
+                      ? DecorationImage(
+                          image: MemoryImage(pickedImage!),
+                          fit: BoxFit.cover,
+                        )
+                      : (imageUrl != null
+                          ? DecorationImage(
+                              image: NetworkImage(imageUrl!),
+                              fit: BoxFit.cover,
+                            )
+                          : null)),
                 ),
+                child: (pickedImage == null && imageUrl == null)
+                    ? const Icon(
+                        Icons.person,
+                        size: 107,
+                      )
+                    : null,
               ),
             ),
             Padding(
@@ -54,7 +118,7 @@ class _ProfileState extends State<Profile> {
                 trailing: Switch(
                   value: false,
                   onChanged: (value) {
-                    data.changeTheme();
+                    classInstancee.changeTheme();
                   },
                 ),
               ),

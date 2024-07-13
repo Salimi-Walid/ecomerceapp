@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordcontroler.text.trim());
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 

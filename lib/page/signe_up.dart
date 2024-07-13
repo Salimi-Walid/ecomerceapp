@@ -30,6 +30,7 @@ class _SignupState extends State<Signup> {
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushNamed('/');
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
